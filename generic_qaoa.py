@@ -1,13 +1,33 @@
-import copy
-from typing import Callable, List
-import numpy as np
+from typing import List
+import sympy
 from qiskit import QuantumCircuit
-import qiskit
-from qiskit.circuit import Instruction
 from sympy import *
 
 SIMULATOR_ENGINE = 'local_qasm_simulator'
 REAL_ENGINE = ''
+
+
+class QaoaCircut(QuantumCircuit):
+    def add_cnot(self, control, target, size):
+        control_index, target_index = Clause.to_qubit_index(control), Clause.to_qubit_index(target)
+        self.cnot(control_index, target_index)
+
+    def add_z_rotation(self, arg, angle, size):
+        if arg == 1:
+            return
+        terms = Mul.make_args(arg)
+        _terms = terms[1:] if terms[0] == -1 else terms
+        if len(_terms) == 1:
+            self.rz(angle, Clause.to_qubit_index(_terms[0]))
+            return
+        for i in range(len(_terms) - 1):
+            self.add_cnot(_terms[i], _terms[i + 1], size)
+        self.barrier()
+        self.rz(angle, Clause.to_qubit_index(_terms[-1]))
+        for i in reversed(range(len(_terms) - 1)):
+            self.add_cnot(_terms[i], _terms[i + 1], size)
+        self.barrier()
+        return
 
 
 class Clause(object):
@@ -24,52 +44,27 @@ class Clause(object):
         return max(self.one_literals + self.zero_literals)
 
     def as_circuit(self, angle) -> QuantumCircuit:
-        one_symbols = [(1-symbols('z'+str(l))) for l in self.one_literals]
-        zero_symbols = [(1+symbols('z'+str(l))) for l in self.zero_literals]
+        one_symbols = [(1 - symbols('z' + str(l))) for l in self.one_literals]
+        zero_symbols = [(1 + symbols('z' + str(l))) for l in self.zero_literals]
         H = 1
-        for sym  in one_symbols:
+        for sym in one_symbols:
             H *= sym
-        for sym  in zero_symbols:
+        for sym in zero_symbols:
             H *= sym
         return self.to_circut(H.expand(), self.size, angle)
 
     @staticmethod
-    def to_circut(symbol, size, angle) -> QuantumCircuit:
+    def to_circut(symbol, size, angle) -> QaoaCircut:
         args = Add.make_args(symbol)
-        qc = QuantumCircuit(size)
-        for arg in args:
-            result = Clause.to_z_rotation(arg, size, angle)
-            if result is not None:
-                qc.append(result, range(size))
-        return qc
-    
-    @staticmethod
-    def to_z_rotation(arg: Symbol, size, angle) -> QuantumCircuit:
-        qc = QuantumCircuit(size)
-        if arg == 1:
-            return None
-        terms = Mul.make_args(arg)
-        _terms = terms[1:] if terms[0] == -1 else terms
-        if len(_terms) == 1:
-            qc.rz(angle, Clause.to_qubit_index(_terms[0]))
-            return qc
-        for i in range(len(_terms)-1):
-            qc.append(Clause.to_cnot(_terms[i],_terms[i+1], size), range(size))
-        qc.rz(angle, Clause.to_qubit_index(_terms[-1]))
-        for i in reversed(range(len(_terms)-1)):
-            qc.append(Clause.to_cnot(_terms[i],_terms[i+1], size), range(size))
-        return qc
-
-    @staticmethod
-    def to_cnot(control, target, size):
-        qc = QuantumCircuit(size)
-        control_index, target_index = Clause.to_qubit_index(control), Clause.to_qubit_index(target)
-        qc.cnot(control_index, target_index)
+        qc = QaoaCircut(size)
+        for _arg in args:
+            qc.add_z_rotation(_arg, size, angle)
         return qc
 
     @staticmethod
     def to_qubit_index(term):
         return int(term.name[1:])
+
 
 class GenericQAOA(object):
     def __init__(self, clauses: List[Clause], p: int, simulate: bool):
@@ -129,6 +124,6 @@ class GenericQAOA(object):
 
 
 if __name__ == '__main__':
-    clause = Clause([0,1,2],[3,4,5],1)
+    clause = Clause([0, 1, 2], [3, 4, 5], 1)
     qc = clause.as_circuit(0)
     print(qc.draw())
