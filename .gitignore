@@ -1,0 +1,11 @@
+/.venv/
+/vqf/research/
+/vqf/tests/
+/vqf/vqf/
+!/vqf/vqf/preprocessing.py
+/vqf/.gitignore
+/vqf/LICENSE
+/vqf/pip_freeze.txt
+/vqf/presentation.pdf
+/vqf/README.md
+/vqf/requirements.txt
