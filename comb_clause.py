@@ -13,32 +13,33 @@ class CombClause(Clause):
         self.one_literals = one_literals
         self.zero_literals = zero_literals
         self.weight = weight
-        self.width = self.msb + 1
         self.size = len(one_literals) + len(zero_literals)
+        self.clause = self._parse_h()
 
     @property
     def msb(self):
         return max(self.one_literals + self.zero_literals)
 
-    def parse_h(self, to_qubit_index) -> Symbol:
+    def _parse_h(self) -> Symbol:
         one_symbols = [(1 - symbols('z' + str(l))) for l in self.one_literals]
         zero_symbols = [(1 + symbols('z' + str(l))) for l in self.zero_literals]
-        H = 1
+        new_clause = 1
         for sym in one_symbols:
-            H *= sym
+            new_clause *= sym
         for sym in zero_symbols:
-            H *= sym
-        return H.expand()
+            new_clause *= sym
+        return new_clause.expand()
 
     @staticmethod
     def to_qubit_index(term):
         return int(term.name[1:])
 
     def objective(self, selected_bitstring):
-        for index, str_value in enumerate(selected_bitstring):
-            value = int(str_value)
-            if value == 1 and index not in self.one_literals:
+        for l in self.one_literals:
+            if selected_bitstring[-l] == '0':
                 return 0
-            if value == 0 and index not in self.zero_literals:
+        for l in self.zero_literals:
+            if selected_bitstring[-l] == '1':
                 return 0
-        return 1
+
+        return -1
