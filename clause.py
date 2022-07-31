@@ -4,12 +4,9 @@ from qaoa_circut import QaoaCircut
 
 
 class Clause:
+    @property
     @abstractmethod
     def msb(self):
-        pass
-
-    @abstractmethod
-    def parse_h(self, to_qubit_index):
         pass
 
     @abstractmethod
