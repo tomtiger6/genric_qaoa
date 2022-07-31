@@ -1,14 +1,13 @@
 from abc import abstractmethod
 
-from qaoa_circut import QaoaCircut
-
 
 class Clause:
     @property
     @abstractmethod
-    def msb(self):
+    def clause(self):
         pass
 
-    @abstractmethod
-    def objective(self, selected_bitstring):
-        pass
+    def objective(self, selected_bitstring) -> float:
+        subs_map = {f"z{idx}": 1 if value == '1' else -1 for idx, value in enumerate(reversed(selected_bitstring))}
+        obj = float(self.clause.subs(subs_map))
+        return obj
