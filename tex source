@@ -1,0 +1,363 @@
+\documentclass[12pt]{amsart}
+
+\usepackage{graphicx}
+\usepackage{amsmath}
+\usepackage{amscd}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage{color}
+\usepackage{fullpage}
+\usepackage{mathtools}
+\usepackage[pagebackref,hypertexnames=false, colorlinks, citecolor=red,linkcolor=blue, urlcolor=red]{hyperref}
+\usepackage{todonotes}
+\usepackage{enumitem}
+
+\newcommand\blue{\color{blue}}
+\newcommand\black{\color{black}}
+\newcommand\red{\color{red}}
+
+\newcommand{\itref}{\ref}
+
+\usepackage[big]{titlesec}
+\numberwithin{equation}{section}
+
+\setcounter{MaxMatrixCols}{30}
+\setcounter{secnumdepth}{2}
+
+\setcounter{tocdepth}{1}
+
+%
+%\theoremstyle{theorem}
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{proposition}[theorem]{Proposition}
+\newtheorem{conjecture}[theorem]{Conjecture}
+
+\newtheorem{corollary}[theorem]{Corollary}
+\newtheorem{remarks}[theorem]{Remarks}
+\newtheorem{notation}[theorem]{Notation}
+\newtheorem{exremark}[theorem]{Extended Remark and Notation}
+\newtheorem{conclremarks}[theorem]{Concluding Remarks}
+%\newenvironment{proof}[1][Proof]{\textbf{#1.} }{\ \rule{0.5em}{0.5em}}
+
+\theoremstyle{definition}
+\newtheorem{example}[theorem]{Example}
+\newtheorem{remark}[theorem]{Remark}
+\newtheorem{definition}[theorem]{Definition}
+\newtheorem{problem}[theorem]{Problem}
+
+%\newenvironment{proof}{\bf Proof. \rm}{$\Box$}
+%      Proof environment
+\renewcommand{\proofname}{\em\textbf{Proof.}}
+\renewcommand{\qedsymbol}{{\vrule height5pt width5pt depth1pt}}
+%
+\DeclarePairedDelimiter{\ceil}{\lceil}{\rceil}
+\DeclarePairedDelimiter{\floor}{\lfloor}{\rfloor}
+\newcommand{\be}{\begin{equation}}
+\newcommand{\ee}{\end{equation}}
+\newcommand{\bes}{\begin{equation*}}
+\newcommand{\ees}{\end{equation*}}
+\newcommand{\ber}{begin{eqnarray}}
+\newcommand{\eer}{end{eqnarray}}
+\newcommand{\barr}{begin{array}}
+\newcommand{\earr}{end{array}}
+% mathcal
+\newcommand{\cA}{\mathcal{A}}
+\newcommand{\cB}{\mathcal{B}}
+\newcommand{\cC}{\mathcal{C}}
+\newcommand{\cD}{\mathcal{D}}
+\newcommand{\cE}{\mathcal{E}}
+\newcommand{\cF}{\mathcal{F}}
+\newcommand{\cG}{\mathcal{G}}
+\newcommand{\cH}{\mathcal{H}}
+\newcommand{\cI}{\mathcal{I}}
+\newcommand{\cJ}{\mathcal{J}}
+\newcommand{\cK}{\mathcal{K}}
+\newcommand{\cL}{\mathcal{L}}
+\newcommand{\cM}{\mathcal{M}}
+\newcommand{\cN}{\mathcal{N}}
+\newcommand{\cO}{\mathcal{O}}
+\newcommand{\cP}{\mathcal{P}}
+\newcommand{\cQ}{\mathcal{Q}}
+\newcommand{\cR}{\mathcal{R}}
+\newcommand{\cS}{\mathcal{S}}
+\newcommand{\cT}{\mathcal{T}}
+\newcommand{\cU}{\mathcal{U}}
+\newcommand{\cV}{\mathcal{V}}
+\newcommand{\cW}{\mathcal{W}}
+\newcommand{\cX}{\mathcal{X}}
+\newcommand{\cY}{\mathcal{Y}}
+\newcommand{\cZ}{\mathcal{Z}}
+% tilde
+\newcommand{\tT}{\widetilde{T}}
+\newcommand{\tV}{\widetilde{V}}
+% R plus
+\newcommand{\Rp}{\mathbb{R}_+}
+\newcommand{\Rpt}{\mathbb{R}_+^2}
+\newcommand{\Rpk}{\mathbb{R}_+^k}
+\newcommand{\lel}{\left\langle}
+\newcommand{\rir}{\right\rangle}
+\newcommand{\diad}{\mathbb{D}_+}
+\newcommand{\oF}{\overrightarrow{F}}
+\newcommand{\mb}[1]{\mathbb{#1}}
+\newcommand{\alt}{\tilde{\alpha}}
+\newcommand{\seqi}[1]{\left(#1_i \right)_{i=1}^\infty}
+\newcommand{\seq}[1]{\left(#1 \right)_{i=1}^\infty}
+\newcommand{\arv}{H^2 \otimes \mb{C}^r}
+\newcommand{\Md}{\mathcal{M}_d}
+\newcommand{\MV}{\mathcal{M}_V}
+\newcommand{\MW}{\mathcal{M}_W}
+% Mathbb
+\newcommand{\bA}{\mathbb{A}}
+\newcommand{\bB}{\mathbb{B}}
+\newcommand{\bC}{\mathbb{C}}
+\newcommand{\bD}{\mathbb{D}}
+\newcommand{\bM}{\mathbb{M}}
+\newcommand{\bN}{\mathbb{N}}
+\newcommand{\bQ}{\mathbb{Q}}
+\newcommand{\bR}{\mathbb{R}}
+\newcommand{\bT}{\mathbb{T}}
+\newcommand{\bZ}{\mathbb{Z}}
+% complex space, balls
+\newcommand{\Cn}{\mathbb{C}^n}
+\newcommand{\Bn}{\mathbb{B}_n}
+\newcommand{\Cd}{\mathbb{C}^d}
+\newcommand{\Bd}{\mathbb{B}_d}
+\newcommand{\pBd}{\partial \mathbb{B}_d}
+\newcommand{\pV}{\partial V}
+\newcommand{\lip}{\langle}
+\newcommand{\rip}{\rangle}
+\newcommand{\ip}[1]{\lip #1 \rip}
+\newcommand{\bip}[1]{\big\lip #1 \big\rip}
+\newcommand{\Bip}[1]{\Big\lip #1 \Big\rip}
+\newcommand{\ep}{\varepsilon}
+\newcommand{\wot}{\textsc{wot}}
+\newcommand{\ol}{\overline}
+\newcommand{\re}{\operatorname{Re}}
+\newcommand{\im}{\operatorname{Im}}
+\newcommand{\rep}{\operatorname{rep}}
+\newcommand{\supp}{\operatorname{supp}}
+\newcommand{\spr}{\operatorname{spr}}
+\newcommand{\Tr}{\operatorname{Tr}}
+\DeclareMathOperator*{\sotlim}{\textsc{sot}--lim}
+\newcommand{\ad}{\operatorname{ad}}
+\newcommand{\alg}{\operatorname{alg}}
+\newcommand{\Aut}{\operatorname{Aut}}
+\newcommand{\diag}{\operatorname{diag}}
+\newcommand{\conv}{\operatorname{conv}}
+\newcommand{\dist}{\operatorname{dist}}
+\newcommand{\id}{\operatorname{id}}
+\newcommand{\Int}{\operatorname{int}}
+\newcommand{\Mult}{\operatorname{Mult}}
+\newcommand{\mlt}{\operatorname{Mult}}
+\newcommand{\Sing}{\operatorname{Sing}}
+\newcommand{\Spec}{\operatorname{Spec}}
+\newcommand{\spn}{\operatorname{span}}
+\newcommand{\CP}{\operatorname{CP}}
+\newcommand{\CCP}{\operatorname{CCP}}
+\newcommand{\UCP}{\operatorname{UCP}}
+\newcommand{\Bsad}{\c\cB(H)_{sa}^d}
+\newcommand{\Wmin}[1]{\cW^{\text{min}}_{#1}}
+\newcommand{\Wmax}[1]{\cW^{\text{max}}_{#1}}
+\newcommand{\Bmin}[1]{\cB^{\text{min}}_{#1}}
+\newcommand{\Bmax}[1]{\cB^{\text{max}}_{#1}}
+% Math boldface
+\newcommand{\ba}{{\mathbf{a}}}
+%Roman letters for math
+\newcommand{\rC}{{\mathrm{C}}}
+%Fraktur letters
+\newcommand{\fA}{{\mathfrak{A}}}
+\newcommand{\fB}{{\mathfrak{B}}}
+\newcommand{\fC}{{\mathfrak{C}}}
+\newcommand{\fD}{{\mathfrak{D}}}
+\newcommand{\fH}{{\mathfrak{H}}}
+\newcommand{\fI}{{\mathfrak{I}}}
+\newcommand{\fJ}{{\mathfrak{J}}}
+\newcommand{\fK}{{\mathfrak{K}}}
+\newcommand{\fL}{{\mathfrak{L}}}
+\newcommand{\fM}{{\mathfrak{M}}}
+\newcommand{\fN}{{\mathfrak{N}}}
+\newcommand{\fR}{{\mathfrak{R}}}
+\newcommand{\fT}{{\mathfrak{T}}}
+\newcommand{\fV}{{\mathfrak{V}}}
+%      Text used in equations
+\newcommand{\foral}{\text{ for all }}
+\newcommand{\qand}{\quad\text{and}\quad}
+\newcommand{\qif}{\quad\text{if}\quad}
+\newcommand{\qfor}{\quad\text{for}\ }
+\newcommand{\qforal}{\quad\text{for all}\ }
+\newcommand{\qforsome}{\quad\text{for some}\ }
+\newcommand{\AND}{\text{ and }}
+\newcommand{\FOR}{\text{ for }}
+\newcommand{\FORAL}{\text{ for all }}
+\newcommand{\IF}{\text{ if }}
+\newcommand{\IFF}{\text{ if and only if }}
+\newcommand{\OR}{\text{ or }}
+\newcommand{\alert}[1]{\textcolor{red}{#1}}
+%my commands 
+\newcommand{\impt}[1]{\underset{\text{#1}}{\implies}}
+\newcommand{\eqt}[1]{\underset{\text{#1}}{=}}
+\newcommand{\leqt}[1]{\underset{\text{#1}}{\leq}}
+\newcommand{\geqt}[1]{\underset{\text{#1}}{\geq}}
+\newcommand{\nin}[1]{#1_{n\in\Bbb{N}}}
+\newcommand{\limit}{\lim_{n\rightarrow \infty}}
+\newcommand{\sst}[3]{\underset{\substack{\text{#1}\\ \text{#2}}}{#3}}
+%my packages
+\usepackage{physics}
+%\usepackage{algorithm2e}
+%\usepackage[margin=2.5cm]{geometry}
+\usepackage{algpseudocode}
+\usepackage{algorithm}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{document}
+\title{Understanding Matrix convex sets}
+\author{Tom Waknine}
+\maketitle
+\section{. Generic QAOA algorithm }
+\subsection{ Introduction}
+In The field of combinatorial optimization we often try to optimize some objective function, or at the very least approximate an optimize solution. Formally we make the following  definitions 
+\begin{definition}\label{def:1.1}
+$C_\alpha$ will be a clause of $n$ bits (or just a clause) if it is a function $C_\alpha:\{0,1\}^n\to\{0,1\}$. We will call $\alpha$ a condition and say that $z\in \{0,1\}^n$ satisfy $\alpha$ if $C_\alpha(z)=1$
+\end{definition}
+\begin{definition}\label{def:1.2}
+$C$ is objective function with $m$ clause and $n$ bits if it is of the form \begin{align*}
+    C(z)=\sum_{\alpha=1}^m C_\alpha (z)
+\end{align*}
+where $z\in \{0,1\}^n$ and each of the $C_\alpha$ is a  clause of $n$ bits 
+\end{definition} 
+With those definition the satisfiability problem ask us to determine if there is some $z\in \{0,1\}^n$ that satisfy all the conditions, i.e. if there is such $z$ such that $C(z)=m$.  The MaxSat problem ask us to find a string $z\in \{0,1\}^n$ such that $C(z)=\max\limits_{z'\in \{0,1\}^n}C(z')$. Finally the Approximate optimization problem ask us to give $z$ such that $C(z)$ is close to the maximum, this not very formal but in different versions of the problem we may make different requirements on the error term $|C(z)-\max\limits_{z'\in \{0,1\}^n}C(z')|$. Now for the Quantum approach toward  combinatorial optimization we need a way to think on objective function and clauses (or objective functions) as operators, which we do in the following way \begin{definition}\label{def:1.3}
+for any clause $C_\alpha$ of $n$ bits it's Hamiltonian $H_\alpha$ will be  
+\begin{align*}
+    H_\alpha=\sum_{z\in\{0,1\}^n}C_\alpha(x)\ket{x}\bra{x}
+\end{align*}
+which is a diagonal operator  over the $2^n$ dimensional Hilbert space by
+\end{definition}
+Now defintion \ref{def:1.3} is useful as it allow us to associate  a function over binary string with a diagonal operator, thus it connect combinatorial objects with quantum ones. We will extend it as follow  
+\begin{definition}\label{def:1.4}
+The problem Hamiltonian $H_P$ is the extension of \ref{def:1.3} to the objective function $C$  \begin{align*}
+    H_P=\sum_{\alpha}H_\alpha=\sum_{x\in \{0,1\}^n}C(x)\ket{x}\bra{x}
+\end{align*}  
+\end{definition}
+Now motivated by our will to work with unitary operators, as well as our familiarity with other problems involving Hamiltonians we may wish to exponentiate our problem Hamiltonian. And indeed it will be useful to look on the following
+\begin{definition}
+\begin{align*}
+    U(H_p,\gamma)=e^{-i\gamma H_P}
+\end{align*} 
+\end{definition}  
+Now it turns out we will also need the mixing Hamiltonian and it's associate unitary operator \begin{definition}\label{def:1.5}
+$H_B=\sum\limits_{i=1}^n \sigma_i^x$ is the mixing Hamiltonian and its unitary is \begin{align*}
+    U(H_B,\beta)=e^{-i\beta H_B}
+\end{align*}
+\end{definition}
+Now note that all the egienvalues of $H_P$ are natural number, hence we may restrict $\gamma$ to $[0,2\pi]$. and similarly we restrict $\beta$ to $[0,\pi]$. We will use our unitaries $U(H_P,\gamma)$, $U(H_B,\beta)$ to define a classical optimization problem as follow \begin{definition}\label{def:1.7}
+given an initial state $s$ and a sequence of angels $\pmb{\gamma}\in [0,2\pi]^p$, $\pmb{\beta}\in [0,\pi]^p$ its angle
+dependent quantum state is \begin{align*}
+    \ket{\psi(\pmb{\gamma},\pmb{\beta})}=\prod_{i=0}^{p-1} \Big(U(H_P,\gamma_i)U(H_B,\beta_i)\Big)\ket{s}=U(H_P,\gamma_p)U(H_B,\beta_p)\dots U(H_P,\gamma_1)U(H_B,\beta_1)\ket{s}
+\end{align*}
+\end{definition} 
+Where we usually take the inital state $s$ to be the fully mixing one \begin{align*}
+    s=\frac{1}{\sqrt{2^n}}\sum_{z\in \{0,1\}^n}\ket{z}
+\end{align*}
+And with that we may finally define \begin{definition}
+$F_p(\pmb{\gamma},\pmb{\beta})=  \bra{\psi(\pmb{\gamma},\pmb{\beta})}H_P\ket{\psi(\pmb{\gamma},\pmb{\beta})}$ is the expectation of $H_P$ with our state and $M_p=\max\limits_{\pmb{\gamma},\pmb{\beta}}F_p(\pmb{\gamma},\pmb{\beta})$ is its optimization.  
+\end{definition}
+Note that an equivalent way to evaluate $F$ at $\pmb{\gamma},\pmb{\beta}$ is to measure $\psi(\pmb{\gamma},\pmb{\beta})$ in the standard basis to get a string $z$ and then $C(z)$ will be the value of $F$ with those angels. It was shown in \cite{QAOA} that we have \begin{align*}
+    \lim_{p\to\infty}M_p=\max_{z\in\{0,1\}^n}C(z)
+\end{align*}
+Now we want to construct  our Hamiltonian in the Pauli $Z$ operators. to do that we use the assumption that each clause depends only on a Small number of bits, i.e for each $\alpha$ there are some $Q_\alpha, \overline{Q}_\alpha \subset [n]$ such that $C_\alpha(z)\neq0$ iff $z_i=1$ for all $i\in Q_\alpha$, $z_i=0$ for all $i\in \overline{Q}_\alpha$ and $|Q_\alpha|+|\overline{Q}_\alpha|$ is relatively small for all $\alpha$. Then we can
+write our objective function in the canonical form \begin{align*}
+    C(z)=\sum_{\alpha=1}^m w_{\alpha}\prod_{i\in Q_\alpha}z_i\prod_{i\in \overline{Q}_\alpha}(1-z_i)
+\end{align*}
+where we use $w_\alpha$ to generalize our construction to clauses $C_\alpha$ that may get values other then $1$.
+And so using the map $x_i\to \frac{1}{2}(1-Z_i)$ we can write our Hamiltonian as \begin{align*}
+    H_P=\sum_{\alpha=1}^m \frac{w_\alpha}{2^{|Q_\alpha|+|\overline{Q}_\alpha|}}\prod_{i\in Q_\alpha}(1-Z_i)\prod_{i\in \overline{Q}_\alpha}(1+Z_i)
+\end{align*}
+ 
+Hence using quantum information we were able to transform our combinatorial optimization problem to a classical optimization problem. In particular we note that after optimizing $F_{p-1}$ to be close to $M_{p-1}$ we only need to optimize the two new angels $\gamma_p,\beta_p$ in $F_p$ to approximate $M_p$. And so if we let $Opt$ be some iterative classical optimization algorithm we can get the following algorithm to solve our Approximate optimization problem
+\[\]\[\]
+\begin{algorithm}[hbt!]
+\caption{generic QAOA algorithm}\label{alg:cap}
+\begin{algorithmic}[1]
+\State Generate $U(H_P,\gamma)$, $U(H_B,\beta)$ from our  combinatorial problem and initialize $\pmb{\gamma},\pmb{\beta}$ with some starting value
+\While{$Opt$ not done}
+\State measure $\psi(\pmb{\gamma},\pmb{\beta})$ in the standard basis to generate sting $z$ and evaluate $C(z)$.
+\State $(\pmb{\gamma},\pmb{\beta})\gets Opt(C(z))$
+\EndWhile
+\State Measure $\psi(\pmb{\gamma},\pmb{\beta})$ to get a string $z$ for which $C(z)\sim M_p\sim \max\limits_{z'\in{0,1}^n}C(z')$
+\State \Return{$z$}
+\end{algorithmic}
+\end{algorithm}
+Where the condition is step 2 is depending on the classical optimization algorithm we choose as well as our desired accuracy.
+Now there are some thing we need to specify for the above algorithm. Specifically which algorithm we want to use as $Opt$ and how do we chose the starting value of the angles, as well as how do we choose $p$ to be big enough such that $M_p$ will be close to the maximal value. But non the less the above give a good overview of our generic QAOA algorithm. Note that as $p$ goes to $\infty$ the probability that our measurement will produce a string $z$ that optimize our problem increases to $1$. Hence assuming that our problem is $NP$, i.e. given a string we can determine if it optimize our objective function we get that the above algorithm under some conditions will actually solve the MaxSat problem and not just the Approximate optimization one(just run it with big $p$ again and again and each time check if the resulting string is maximize $C$).  
+\subsection{ Classical optimization algorithm}
+There are many classical algorithm that find the maximum of a function $f$ by iteratively evaluating it at a point and readjusting. The most famous of which is the Newton's Raphson method, which look on the iterative process $x_{n+1}=x_n-\frac{f'(x_n)}{f''(x_n)}$ that on certain condition will converge to some extremum point of $f$. Now this method has many generalization, for example in multivariate case where we can use the iterations $x_{k+1}=x_k-H^{-1}(x_k)\Delta f(x_k)$, where $H$ is the Hessian matrix. In those types of algorithms a recurring theme of those generalization is the use of the derivative (or it's multivariate counterpart). Note that in the above if we wanted to find an extremum point of $f$ we need to know both $f'$ and $f''$ (or $\Delta f$ and $H$ in the multivariate case) so we need to know the second derivative of $f$. Those class of methods are called second derivative methods or Newton's method, and in general they tend to converge faster then first derivative methods. This is because knowing the derivative tell us only in which direction we should move, but the second derivative tell us what the step size should be. 
+\[\]
+The problem with those kind of methods is that they require us to have some non trivial knowledge on our function (specifically it's derivatives) which often can not be computed easily. The solution usually taken in cases like that is to use the evaluations of the function in order to approximate those derivative, and then use those approximation to find the maxima of the function. algorithms that use this method of approximating the derivative are called quasi-Newton methods or semi-Newton methods.
+\subsection{ BFGS}
+the Broyden–Fletcher–Goldfarb–Shanno (BFGS) algorithm is one such quasi-Newton method which use iteration to both approximate the Hessian matrix $H$ of $f$ and it's minima (or maxima). The BFGS algorithm start from some initional guess $B_0, x_0$ of the Hessian matrix and the minima and from there doing the following iterations    
+\begin{algorithm}[hbt!]
+\caption{BFGS algorithm}\label{alg:cap}
+\begin{algorithmic}[1]
+\State find $p_k\in \Bbb{R}^n$ by solving $B_kp_k=-\Delta f(x_k)$
+\State use one dimensional optimization to find $\alpha_k\in \Bbb{R}$ that (approximately) minimize the function $\alpha \to f(x_k+\alpha p_k)$  
+\State set $s_k=\alpha_kp_k$ and update $x_{k+1}=x_k+s_k$
+\State set $y_k=\Delta f(x_{k+1})-f(x_k)$
+\State update $B_{k+1}=B_k+\frac{\ket{y_k}\bra{y_k}}{\braket{y_k}{s_k}}-\frac{\ket{B_ks_k}\bra{B_ks_k}}{\bra{s_k}B_k\ket{s_k}}$
+\end{algorithmic}
+\end{algorithm}
+and doing may iteration of the above will give us $B_k$ that is close to $H$ and more impotently $x_k$ that is close to the minima of $f$.   
+\section{. The VQF algorithm }
+\subsection{ Introduction}
+We will now turn to use of QAOA algorithm to solve the problem of integer factorization, i.e given some number $m$ finding its prime factor. specifically we will assume that $m=p\cdot q$ for some primes $p,q$ (since it is easy to reduce to that case). For that we will consider the binary representation of our numbers\begin{align*}
+   &m=\sum_{i=0}^{n_m}m_k2^i 
+    \\&p=\sum_{i=0}^{n_p}p_i2^i 
+   \\&q=\sum_{i=0}^{n_q}q_i2^i
+\end{align*}
+So we can turn the equation $m=p\cdot q$ into \begin{align}
+    \sum_{k=0}^{n_m}m_k2^k =\Big(p=\sum_{i=0}^{n_p}p_i2^i \Big)\Big(q=\sum_{i=0}^{n_q}q_i2^i \Big)=\sum_{k=0}^{n_p+n_q} \sum_{i=0}^k p_iq_{k-i}2^k
+\end{align}
+Now we want to turn this into a set of equation (which will be our clauses), but note that due to the carry bit the above dose \textbf{not} imply that $m_k=\sum_{i=0}^k p_iq_{k-i}$. So let us introduce those carry bit into our equation. we define the carry bits into the $i$ coefficient by induction, with $w_0=0$ (since there is no carry bit from the first muktiplication ), and then assuming we define $w_j$ for all $j<k$ we define $w_k$ by \begin{align*}
+    w_k= \sum_{i=0}^k p_iq_{k-i}+ w_{i,k-i}
+\end{align*}
+where $w_{k,j}$ is the binary representation of $w_k$ so \begin{align*}
+    w_k=\sum_{j=0}^{n_k} w_{k,j}2^j
+\end{align*}
+And now (2.1) becomes 
+\begin{align}
+    \sum_{k=0}^{n_m}m_k2^k=\sum_{k=0}^{n_p+n_q}\sum_{i=0}^k \Big(p_iq_{k-i}+w_{i,k-i}-\sum_{j=1}^{n_k}w_{k,j}2^{j}\Big)2^k 
+\end{align}
+And note that the coefficient of $2^k$ in the LHS is simply $w_{k,0}$ which is just a single bit (thus must be equal to $m_k$). Hence we can turn (2.2) into $n+p+n_q$ equations, for that we denote $n_c=n_p+n_q$ and we expend $w_k$ into a $n_c$ bits by setting $w_{k,j}=0$ for $n_k<j\leq n_c$. We
+also make the change of variable $z_{i,j}=w_{i,j-i}$, so $z_{i,j}$ represent the carry bit from bit position $i$ into bit position $j$. Then we get the following set of $n_c$ equations 
+\begin{align}
+m_i=\sum_{j=0}^i p_iq_{j-i}+z_{i,j}-\sum_{k=1}^{n_c} z_{i,i+k}2^k 
+\end{align}
+Which allow us to define our clauses \begin{align}
+    C_i=\sum_{j=0}^i \big(p_iq_{j-i}+z_{i,j}\big)-m_i-\sum_{k=1}^{n_c} z_{i,i+k}2^k
+\end{align}
+Now note that it is not clear over how may bits our clauses are defined since we don't know $n_p,n_q$ A priori. But if we assume WOLOG that $q\leq p$ we know that $\sqrt{m}\leq q\leq p\leq m$ hence $\floor{\frac{m}{2}}\leq n_q\leq n_p\leq n_m$ so by extending with $0$ we may  assume that $n_p=n_m$ and $n_q=\floor{\frac{m}{2}}$. Now before we construct our Hamiltonian we need to make some preprocessing to simplify the equations (2.2). For that we using the following rules
+\begin{align*}
+&xy-1=0\implies x=y=1
+\\&x+y-1=0\implies xy=0
+\\&a-bx=0 \implies x=1
+\\&\sum_{i}x_i=0\implies x_i=0
+\\&\sum_{i=1}^a x_i -a=0\implies x_i=1  
+\end{align*}   
+And now we can let $C_i'$ be the simplified form of $C_i$ after using the above rules on our equations. We note that by numerical results from \cite{VQF} going from $C_i$ to $C_i'$  will reduce the number of qubits from $O(n_m\log n_m)$ to $O(n_m)$. Now we construct our objective function, for technical reasons it will be convinent to work with $C_i^2$ rather then $C_i$ so we define 
+\begin{align}
+    C=\sum_{i=1}^{n_m} C_i'^2
+\end{align}   
+And from here we may use the generic QAOA algorithm to find the solution.
+\bibliographystyle{amsplain}
+\begin{thebibliography}{99}
+%
+%\bibitem{AJ09} A. Avila and S. Jitomirskaya, 
+%\emph{The ten martini problem}, 
+%Ann. of Math. (2009), 303--342.
+\bibitem{QAOA} Farhi, E., Goldstone, J. and Gutmann, S., 2014. A quantum approximate optimization
+algorithm. arXiv preprint arXiv:1411.4028.
+\bibitem{VQF}
+Anschuetz, E., Olson, J., Aspuru-Guzik, A. and Cao, Y., 2019, March. Variational quantum
+factoring. In International Workshop on Quantum Technology and Optimization Problems (pp.
+74-85). Springer, Cham
+\end{thebibliography}
+\end{document}
